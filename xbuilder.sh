@@ -11,8 +11,10 @@ i=$(( $(docker ps --format "{{.Names}}" | grep -c "$NAME") + 1 ))
 # New Container Name
 CONTAINER_NAME="${NAME}_$i"
 
-# Run the container
+#remove existitng container if any
+docker rm "$CONTAINER_NAME" >/dev/null 2>&1
 
+# Run the container
 docker run -d \
 	--name "$CONTAINER_NAME" \
 	--hostname DOCKER-DMC \
